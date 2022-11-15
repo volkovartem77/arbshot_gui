@@ -19,7 +19,8 @@ git clone https://github.com/volkovartem77/arbshot_gui.git
 
 **Install all dependencies in package.json**
 ```
-cd ~/arbshot_gui/; sudo npm install
+cd ~/arbshot_gui/; rm package-lock.json
+sudo npm install
 ```
 
 # Run app (docker)
