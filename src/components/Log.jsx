@@ -2,15 +2,16 @@ import Paper from "@material-ui/core/Paper";
 import ScrollToBottom from "react-scroll-to-bottom";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
-import {getKey} from "../utils";
 import withStyles from "@material-ui/core/styles/withStyles";
 import {connect} from "react-redux";
-import {fetchGeneralLog} from "../store/log/actions";
+import {disableRefreshLogButton, fetchGeneralLog} from "../store/log/actions";
 import {bindActionCreators} from "redux";
 import {hostIP} from "../server_adress";
 import Divider from "@material-ui/core/Divider";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
+import {IconButton} from "@material-ui/core";
+import RefreshIcon from "@material-ui/icons/Refresh";
 
 
 const styles = {
@@ -45,6 +46,10 @@ const styles = {
         height: 400,
         paddingTop: 20,
         paddingLeft: 25,
+    },
+    log_string: {
+        padding: 4,
+        fontSize: 13,
     }
 }
 
@@ -56,28 +61,30 @@ class Log extends React.Component {
 
     componentDidMount() {
         this.props.fetchGeneralLog(hostIP + "/get_log");
-        this.timerID = setInterval(
-            () => this.tick(),
-            10000
-        );
-    }
-
-    tick() {
-        this.props.fetchGeneralLog(hostIP + "/get_log");
-    }
-
-    componentWillUnmount() {
-        clearInterval(this.timerID);
     }
 
     render() {
-        const {classes} = this.props;
+        const {classes, refresh_log_button_disabled} = this.props;
+
+        const handleRefreshLog = () => {
+            this.props.disableRefreshLogButton();
+            this.props.fetchGeneralLog(hostIP + "/get_log");
+        }
 
         return (
             <div className={classes.root}>
-                <Typography variant="h6" className={classes.t_title}>
-                    General Log
-                </Typography>
+                <Grid container spacing={1}>
+                    <Grid item xs={12}>
+                        <Typography variant="h6" className={classes.t_title}>
+                            General Log
+                            <IconButton edge="end" aria-label="stop" onClick={() => handleRefreshLog()}
+                                        disabled={refresh_log_button_disabled}
+                                        color="primary">
+                                <RefreshIcon/>
+                            </IconButton>
+                        </Typography>
+                    </Grid>
+                </Grid>
                 <Divider className={classes.divider}/>
                 <Container maxWidth="md" className={classes.root_container}>
                     <Grid item xs={12}>
@@ -85,9 +92,10 @@ class Log extends React.Component {
                             <p className={classes.title}><i>general.log</i></p>
                             <ScrollToBottom className={classes.scroll}>
                                 {this.props.general_log.map((line) => (
-                                    <Typography variant="body2" gutterBottom key={getKey()}>
-                                        {line}
-                                    </Typography>
+                                    // <Typography variant="body2" gutterBottom key={getKey()}>
+                                    //     {line}
+                                    // </Typography>
+                                    <div className={classes.log_string}>{line}</div>
                                 ))}
                             </ScrollToBottom>
                         </Paper>
@@ -101,13 +109,15 @@ class Log extends React.Component {
 
 const putStateToProps = (state) => {
     return {
-        general_log: state.log.general_log
+        general_log: state.log.general_log,
+        refresh_log_button_disabled: state.log.refresh_log_button_disabled
     };
 };
 
 const putActionsToProps = (dispatch) => {
     return {
-        fetchGeneralLog: bindActionCreators(fetchGeneralLog, dispatch)
+        fetchGeneralLog: bindActionCreators(fetchGeneralLog, dispatch),
+        disableRefreshLogButton: bindActionCreators(disableRefreshLogButton, dispatch)
     };
 };
 
