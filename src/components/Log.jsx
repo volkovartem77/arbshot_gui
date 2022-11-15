@@ -24,7 +24,7 @@ const styles = {
     },
     t_title: {
         color: "#696665",
-        margin: 20,
+        margin: 0,
     },
     divider: {
         margin: 20,
