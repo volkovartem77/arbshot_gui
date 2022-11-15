@@ -1,4 +1,4 @@
-# TriangBot GUI. Deploy on server Ubuntu 20.04 (DigitalOcean 2GB/2CPU)
+# ArbShot GUI. Deploy on server Ubuntu 20.04 (DigitalOcean 2GB/2CPU)
 
 ## INSTALL NODE.JS & NPM
 
@@ -9,22 +9,17 @@ curl -sL https://deb.nodesource.com/setup_14.x | sudo bash -
 sudo apt-get install -y nodejs
 ```
 
-##### Install Git, TriangBot GUI
+##### Install Git, ArbShot GUI
 
 ```
 apt-get install git-core
 cd ~/
-git clone https://github.com/volkovartem77/triangbot_gui.git
+git clone https://github.com/volkovartem77/arbshot_gui.git
 ```
 
 **Install all dependencies in package.json**
 ```
-cd ~/triangbot_gui/; sudo npm install
-```
-> No worries if you see follow warnings
-```
-npm WARN optional Skipping failed optional dependency /chokidar/fsevents:
-npm WARN notsup Not compatible with your operating system or architecture: fsevents@1.2.9
+cd ~/arbshot_gui/; sudo npm install
 ```
 
 # Run app (docker)
@@ -41,7 +36,7 @@ sudo systemctl status docker
 ```
 
  Change server's IP address if necessary. \
- ```nano ~/triangbot_gui/src/server_adress.js``` \
+ ```nano ~/arbshot_gui/src/server_adress.js``` \
  Press Ctrl-X, then Y, then Enter - to save it and close
  
  Create username and password for Basic-Auth  
@@ -59,18 +54,11 @@ then type password
  
  ### Update project
  ```
-cd ~/triangbot_gui
+cd ~/arbshot_gui
 docker compose down
 git pull
 ```
 ```
 npm run build
 docker compose up -d
-```
- 
- ### useful commands
- One liner to stop / remove all Docker containers:
- ```
- docker stop $(docker ps -a -q)
- docker rm $(docker ps -a -q)
 ```
