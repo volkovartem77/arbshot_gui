@@ -12,6 +12,7 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import {IconButton} from "@material-ui/core";
 import RefreshIcon from "@material-ui/icons/Refresh";
+import {getKey} from "../utils";
 
 
 const styles = {
@@ -92,10 +93,7 @@ class Log extends React.Component {
                             <p className={classes.title}><i>general.log</i></p>
                             <ScrollToBottom className={classes.scroll}>
                                 {this.props.general_log.map((line) => (
-                                    // <Typography variant="body2" gutterBottom key={getKey()}>
-                                    //     {line}
-                                    // </Typography>
-                                    <div className={classes.log_string}>{line}</div>
+                                    <div className={classes.log_string} key={getKey()}>{line}</div>
                                 ))}
                             </ScrollToBottom>
                         </Paper>

@@ -4,6 +4,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
 import Log from "./Log";
+import Balance from "./Balance";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -53,6 +54,7 @@ function TabsPanel() {
                 </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
+                <Balance/>
                 <Log/>
             </TabPanel>
         </Box>
