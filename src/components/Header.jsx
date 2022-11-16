@@ -3,7 +3,6 @@ import {connect} from "react-redux";
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import EqualizerIcon from '@material-ui/icons/Equalizer';
 import IconButton from "@material-ui/core/IconButton";
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import StopIcon from '@material-ui/icons/Stop';
@@ -12,7 +11,6 @@ import {fetchBotStatus, setBotStatusPending, startStopBot,} from "../store/heade
 import {bindActionCreators} from "redux";
 import {hostIP} from "../server_adress";
 import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
 
 const styles = {
     root: {
@@ -130,16 +128,11 @@ class Header extends React.Component {
                 <Toolbar>
                     <Grid container justifyContent="center" spacing={2}>
                         <Grid item xs={1}/>
-                        <EqualizerIcon fontSize="large" color="error"/>
+                        {/*<EqualizerIcon fontSize="large" color="error"/>*/}
                         <Typography variant="h6" className={classes.title_dark}>
                             TRIANGULAR - BINANCE
                         </Typography>
                     </Grid>
-                    <Box display="flex" justifyContent="flex-end">
-                        <Typography variant="h6" className={classes.title_label}>
-                            Trading
-                        </Typography>
-                    </Box>
                     <IconButton edge="end" aria-label="start"
                         onClick={() => this.handleStartBotClick()}
                         disabled={bot_status.bot_status === "Active" || bot_status.bot_status === "Pending"}

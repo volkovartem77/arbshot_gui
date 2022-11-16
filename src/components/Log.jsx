@@ -4,14 +4,13 @@ import Typography from "@material-ui/core/Typography";
 import React from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
 import {connect} from "react-redux";
-import {disableRefreshLogButton, fetchGeneralLog} from "../store/log/actions";
+import {fetchGeneralLog, setAutoRefreshLog} from "../store/log/actions";
 import {bindActionCreators} from "redux";
 import {hostIP} from "../server_adress";
 import Divider from "@material-ui/core/Divider";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
-import {IconButton} from "@material-ui/core";
-import RefreshIcon from "@material-ui/icons/Refresh";
+import {Switch} from "@material-ui/core";
 import {getKey} from "../utils";
 
 
@@ -33,7 +32,7 @@ const styles = {
     paper: {
         padding: 20,
         textAlign: 'left',
-        maxHeight: 450,
+        maxHeight: 540,
         overflow: 'auto',
         paddingTop: 5,
         paddingLeft: 5,
@@ -51,7 +50,15 @@ const styles = {
     log_string: {
         padding: 4,
         fontSize: 13,
-    }
+    },
+    checkbox: {
+        // margin: 15,
+        // float: "left",
+    },
+    checkbox_label: {
+        marginTop: 25,
+        float: "left",
+    },
 }
 
 class Log extends React.Component {
@@ -62,15 +69,28 @@ class Log extends React.Component {
 
     componentDidMount() {
         this.props.fetchGeneralLog(hostIP + "/get_log");
+        this.timerID = setInterval(
+            () => this.tick(),
+            1000
+        );
+    }
+
+    tick() {
+        if (this.props.auto_refresh_log) {
+            this.props.fetchGeneralLog(hostIP + "/get_log");
+        }
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.timerID);
+    }
+
+    handleChangeAutoRefreshLogCheckbox = (checked) => {
+        this.props.setAutoRefreshLog(checked);
     }
 
     render() {
-        const {classes, refresh_log_button_disabled} = this.props;
-
-        const handleRefreshLog = () => {
-            this.props.disableRefreshLogButton();
-            this.props.fetchGeneralLog(hostIP + "/get_log");
-        }
+        const {classes, auto_refresh_log} = this.props;
 
         return (
             <div className={classes.root}>
@@ -78,11 +98,12 @@ class Log extends React.Component {
                     <Grid item xs={12}>
                         <Typography variant="h6" className={classes.t_title}>
                             General Log
-                            <IconButton edge="end" aria-label="stop" onClick={() => handleRefreshLog()}
-                                        disabled={refresh_log_button_disabled}
-                                        color="primary">
-                                <RefreshIcon/>
-                            </IconButton>
+                            <Switch
+                                checked={auto_refresh_log}
+                                onChange={(e) => this.handleChangeAutoRefreshLogCheckbox(e.target.checked)}
+                                color="primary"
+                                inputProps={{ 'aria-label': 'primary checkbox' }}
+                            />
                         </Typography>
                     </Grid>
                 </Grid>
@@ -108,14 +129,14 @@ class Log extends React.Component {
 const putStateToProps = (state) => {
     return {
         general_log: state.log.general_log,
-        refresh_log_button_disabled: state.log.refresh_log_button_disabled
+        auto_refresh_log: state.log.auto_refresh_log,
     };
 };
 
 const putActionsToProps = (dispatch) => {
     return {
         fetchGeneralLog: bindActionCreators(fetchGeneralLog, dispatch),
-        disableRefreshLogButton: bindActionCreators(disableRefreshLogButton, dispatch)
+        setAutoRefreshLog: bindActionCreators(setAutoRefreshLog, dispatch)
     };
 };
 

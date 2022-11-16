@@ -1,16 +1,16 @@
-import {DISABLE_REFRESH_LOG_BUTTON, FETCH_GENERAL_LOG} from "./actions";
+import {FETCH_GENERAL_LOG, SET_AUTO_REFRESH_LOG} from "./actions";
 
 const defaultState = {
     general_log: [],
-    refresh_log_button_disabled: false,
+    auto_refresh_log: false,
 };
 
 export const LogReducer = (state = defaultState, action) => {
     switch (action.type) {
         case FETCH_GENERAL_LOG:
             return { ...state, general_log: action.payload, refresh_log_button_disabled: false };
-        case DISABLE_REFRESH_LOG_BUTTON:
-            return { ...state, refresh_log_button_disabled: action.payload };
+        case SET_AUTO_REFRESH_LOG:
+            return { ...state, auto_refresh_log: action.payload}
         default:
             return state;
     }
