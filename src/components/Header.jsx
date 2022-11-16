@@ -128,7 +128,6 @@ class Header extends React.Component {
                 <Toolbar>
                     <Grid container justifyContent="center" spacing={2}>
                         <Grid item xs={1}/>
-                        {/*<EqualizerIcon fontSize="large" color="error"/>*/}
                         <Typography variant="h6" className={classes.title_dark}>
                             TRIANGULAR - BINANCE
                         </Typography>
