@@ -205,7 +205,6 @@ class HistoryHeaders extends React.Component {
                 <Grid item xs={1} className={classes.table_profit}>
                     <Typography className={classes.table_header}>Profit</Typography>
                 </Grid>
-                {/*<Grid item xs={3}/>*/}
             </Grid>
         </div>
     }
@@ -240,7 +239,6 @@ class HistoryItem extends React.Component {
                 <Grid item xs={1} className={classes.table_profit}>
                     <Typography className={classes.pi_profit}>{profitStyle(classes, chain['profit_usdt'])}</Typography>
                 </Grid>
-                {/*<Grid item xs={3}/>*/}
             </Grid>
         </div>
     }

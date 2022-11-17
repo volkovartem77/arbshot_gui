@@ -33,6 +33,9 @@ const styles = {
     balance_paper: {
         minWidth: 250
     },
+    balance_paper_large: {
+        minWidth: 350
+    },
 
     // Supervisor
     listItemText:{
@@ -78,7 +81,7 @@ class Dashboard extends React.Component {
                 <Container maxWidth="md" className={classes.root_container}>
                     <Grid item xs={12}>
                         <Grid container spacing={1} justifyContent="center">
-                            <Grid item xs={3} className={classes.balance_paper}>
+                            <Grid item xs={3} className={window.innerWidth > 600?classes.balance_paper:classes.balance_paper_large}>
                                 <Balance
                                     classes={classes}
                                     balance={this.props.balance}
