@@ -30,7 +30,7 @@ const styles = {
         margin: 8
     },
     history_container: {
-        minWidth: 500
+        minWidth: 375
     },
 
     // Table
@@ -241,6 +241,7 @@ class History extends React.Component {
                     <Grid item xs={12}>
                         <Grid container justifyContent="center" spacing={2} className={classes.root}>
                             <Grid item xs={12} className={classes.history_container}>
+                                <Divider className={classes.divider}/>
                                 <HistoryHeaders classes={classes}/>
                                 <Divider className={classes.divider}/>
                                 {

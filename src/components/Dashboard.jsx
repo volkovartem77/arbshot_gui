@@ -20,11 +20,11 @@ const styles = {
         marginBottom: 20
     },
     root_container: {
-        // marginLeft: 0
+        paddingLeft: 0
     },
     paper: {
         textAlign: 'center',
-        margin: 20,
+        margin: 5,
         padding: 30,
     },
     divider_paper: {
@@ -75,9 +75,9 @@ class Dashboard extends React.Component {
 
         return <div>
             <div className={classes.root}>
-                <Container maxWidth="md" className={classes.root_container}>
+                <Container maxWidth="sm" className={classes.root_container}>
                     <Grid item xs={12}>
-                        <Grid container spacing={1}>
+                        <Grid container spacing={1} justifyContent="center">
                             <Grid item xs={3} className={classes.balance_paper}>
                                 <Balance
                                     classes={classes}
