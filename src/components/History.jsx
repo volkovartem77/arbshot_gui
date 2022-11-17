@@ -260,7 +260,7 @@ class History extends React.Component {
         if (_hist.length > 0) {
             _hist.sort(function (a, b) {
                 return a.timestamp - b.timestamp;
-            });
+            }).reverse();
         }
 
         return <div>
