@@ -117,8 +117,7 @@ const styles = {
     },
 }
 
-function sort_hist(hist) {
-    let _hist = hist.slice()
+function sort_hist(_hist) {
     let sorted_hist = []
     let hist_len = _hist.length
     for (let i = 0; i < hist_len; i++) {
