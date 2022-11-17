@@ -15,8 +15,8 @@ const styles = {
         marginTop: 20,
     },
     divider: {
-        marginTop: 20,
-        marginBottom: 20
+        marginTop: 10,
+        marginBottom: 10
     },
     root_container: {
         // marginLeft: 0
@@ -117,25 +117,25 @@ const styles = {
     },
 }
 
-function sort_hist(_hist) {
-    let sorted_hist = []
-    let hist_len = _hist.length
-    for (let i = 0; i < hist_len; i++) {
-        let max = 0
-        let max_item = {}
-        let max_item_index = 0
-        for (let it = 0; it < _hist.length; it++) {
-            if (Date.parse(_hist[it].datetime) > max) {
-                max = Date.parse(_hist[it].datetime)
-                max_item = _hist[it]
-                max_item_index = it
-            }
-        }
-        sorted_hist.push(max_item)
-        _hist.splice(max_item_index, 1)
-    }
-    return sorted_hist
-}
+// function sort_hist(_hist) {
+//     let sorted_hist = []
+//     let hist_len = _hist.length
+//     for (let i = 0; i < hist_len; i++) {
+//         let max = 0
+//         let max_item = {}
+//         let max_item_index = 0
+//         for (let it = 0; it < _hist.length; it++) {
+//             if (Date.parse(_hist[it].datetime) > max) {
+//                 max = Date.parse(_hist[it].datetime)
+//                 max_item = _hist[it]
+//                 max_item_index = it
+//             }
+//         }
+//         sorted_hist.push(max_item)
+//         _hist.splice(max_item_index, 1)
+//     }
+//     return sorted_hist
+// }
 
 function profitStyle(classes, profit) {
     if (profit > 0) {
@@ -256,7 +256,12 @@ class History extends React.Component {
     render() {
         const { classes, history } = this.props;
 
-        let _hist = sort_hist(Object.values(history))
+        let _hist = Object.values(history)
+        if (_hist.length > 0) {
+            _hist.sort(function (a, b) {
+                return a.timestamp - b.timestamp;
+            });
+        }
 
         return <div>
             <div className={classes.root}>
@@ -267,8 +272,7 @@ class History extends React.Component {
                                 <Divider className={classes.divider}/>
                                 <HistoryHeaders classes={classes}/>
                                 <Divider className={classes.divider}/>
-                                <p>{JSON.stringify(_hist)}</p>
-                                {Object.values(history).map((value) => (
+                                {_hist.map((value) => (
                                     <HistoryItem
                                         classes={classes}
                                         chain={value}
