@@ -48,6 +48,10 @@ const styles = {
         minWidth: 130,
         maxWidth: 135,
     },
+    table_datetime_small: {
+        minWidth: 100,
+        maxWidth: 105,
+    },
     table_chain: {
         minWidth: 160,
         maxWidth: 165,
@@ -64,9 +68,13 @@ const styles = {
         minWidth: 100,
         maxWidth: 110,
     },
-    table_diff: {
+    table_status_small: {
         minWidth: 50,
-        maxWidth: 60,
+        maxWidth: 55,
+    },
+    table_diff: {
+        minWidth: 35,
+        maxWidth: 40,
     },
     table_profit: {
         maxWidth: 60
@@ -121,6 +129,13 @@ const styles = {
     },
 }
 
+function datetimeStyle(datetime) {
+    if (window.innerWidth > 600) {
+        return datetime
+    }
+    return datetime.replace('2022-', '').replace('2023-', '')
+}
+
 function chainStyle(arb) {
     if (window.innerWidth > 600) {
         return arb
@@ -141,12 +156,21 @@ function profitStyle(classes, profit) {
 
 function chainStatus(classes, status) {
     if (status === "COMPLETED") {
+        if (window.innerWidth <= 600) {
+            status = 'COMP'
+        }
         return <span className={classes.chain_status_completed}>{status}</span>
     }
     if (status === "HOLDING") {
+        if (window.innerWidth <= 600) {
+            status = 'HOLD'
+        }
         return <span className={classes.chain_status_holding}>{status}</span>
     }
     if (status === "CANCELED") {
+        if (window.innerWidth <= 600) {
+            status = 'CANC'
+        }
         return <span className={classes.chain_status_canceled}>{status}</span>
     }
     return <span className={classes.chain_status_canceled}>{status}</span>
@@ -163,7 +187,7 @@ class HistoryHeaders extends React.Component {
 
         return <div>
             <Grid container justifyContent="flex-start" spacing={2} className={classes.root_table}>
-                <Grid item xs={2} className={classes.table_datetime}>
+                <Grid item xs={2} className={window.innerWidth > 600?classes.table_datetime:classes.table_datetime_small}>
                     <Typography className={classes.table_header}>DateTime</Typography>
                 </Grid>
                 <Grid item xs={3} className={window.innerWidth > 600?classes.table_chain:classes.table_chain_small}>
@@ -172,11 +196,11 @@ class HistoryHeaders extends React.Component {
                 <Grid item xs={1} className={classes.table_size}>
                     <Typography className={classes.table_header}>Size</Typography>
                 </Grid>
-                <Grid item xs={1} className={classes.table_status}>
+                <Grid item xs={1} className={window.innerWidth > 600?classes.table_status:classes.table_status_small}>
                     <Typography className={classes.table_header}>Status</Typography>
                 </Grid>
                 <Grid item xs={1} className={classes.table_diff}>
-                    <Typography className={classes.table_header}>Diff%</Typography>
+                    <Typography className={classes.table_header}>Diff</Typography>
                 </Grid>
                 <Grid item xs={1} className={classes.table_profit}>
                     <Typography className={classes.table_header}>Profit</Typography>
@@ -198,8 +222,8 @@ class HistoryItem extends React.Component {
 
         return <div>
             <Grid container justifyContent="flex-start" spacing={2} className={classes.root_table}>
-                <Grid item xs={2} className={classes.table_datetime}>
-                    <Typography className={classes.pi_datetime}>{chain['datetime']}</Typography>
+                <Grid item xs={2} className={window.innerWidth > 600?classes.table_datetime:classes.table_datetime_small}>
+                    <Typography className={classes.pi_datetime}>{datetimeStyle(chain['datetime'])}</Typography>
                 </Grid>
                 <Grid item xs={3} className={window.innerWidth > 600?classes.table_chain:classes.table_chain_small}>
                     <Typography className={classes.pi_chain}>{chainStyle(chain['arb'])}</Typography>
@@ -207,11 +231,11 @@ class HistoryItem extends React.Component {
                 <Grid item xs={1} className={classes.table_size}>
                     <Typography className={classes.pi_size}>{chain['size_usdt'].toFixed(2)}</Typography>
                 </Grid>
-                <Grid item xs={1} className={classes.table_status}>
+                <Grid item xs={1} className={window.innerWidth > 600?classes.table_status:classes.table_status_small}>
                     <Typography className={classes.pi_status}>{chainStatus(classes, chain['status'])}</Typography>
                 </Grid>
                 <Grid item xs={1} className={classes.table_diff}>
-                    <Typography className={classes.pi_diff}>{chain['diff']}</Typography>
+                    <Typography className={classes.pi_diff}>{parseFloat(chain['diff']).toFixed(2)}</Typography>
                 </Grid>
                 <Grid item xs={1} className={classes.table_profit}>
                     <Typography className={classes.pi_profit}>{profitStyle(classes, chain['profit_usdt'])}</Typography>
