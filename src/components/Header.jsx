@@ -101,7 +101,7 @@ class Header extends React.Component {
         this.props.fetchBotStatus(hostIP + "/get_bot_status");
         this.timerID = setInterval(
             () => this.tick(),
-            3000
+            10000
         );
     }
 
