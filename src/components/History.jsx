@@ -49,8 +49,12 @@ const styles = {
         maxWidth: 135,
     },
     table_chain: {
-        minWidth: 155,
-        maxWidth: 160,
+        minWidth: 160,
+        maxWidth: 165,
+    },
+    table_chain_small: {
+        minWidth: 45,
+        maxWidth: 50,
     },
     table_size: {
         minWidth: 40,
@@ -117,6 +121,13 @@ const styles = {
     },
 }
 
+function chainStyle(arb) {
+    if (window.innerWidth > 600) {
+        return arb
+    }
+    return arb.split('-')[1]
+}
+
 function profitStyle(classes, profit) {
     if (profit > 0) {
         return <span className={classes.profit_positive}>{profit}</span>
@@ -155,7 +166,7 @@ class HistoryHeaders extends React.Component {
                 <Grid item xs={2} className={classes.table_datetime}>
                     <Typography className={classes.table_header}>DateTime</Typography>
                 </Grid>
-                <Grid item xs={3} className={classes.table_chain}>
+                <Grid item xs={3} className={window.innerWidth > 600?classes.table_chain:classes.table_chain_small}>
                     <Typography className={classes.table_header}>Chain</Typography>
                 </Grid>
                 <Grid item xs={1} className={classes.table_size}>
@@ -190,8 +201,8 @@ class HistoryItem extends React.Component {
                 <Grid item xs={2} className={classes.table_datetime}>
                     <Typography className={classes.pi_datetime}>{chain['datetime']}</Typography>
                 </Grid>
-                <Grid item xs={3} className={classes.table_chain}>
-                    <Typography className={classes.pi_chain}>{chain['arb']}</Typography>
+                <Grid item xs={3} className={window.innerWidth > 600?classes.table_chain:classes.table_chain_small}>
+                    <Typography className={classes.pi_chain}>{chainStyle(chain['arb'])}</Typography>
                 </Grid>
                 <Grid item xs={1} className={classes.table_size}>
                     <Typography className={classes.pi_size}>{chain['size_usdt'].toFixed(2)}</Typography>
