@@ -4,7 +4,8 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
 import Log from "./Log";
-import Balance from "./Balance";
+import Dashboard from "./Dashboard";
+import History from "./History";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -50,11 +51,15 @@ function TabsPanel() {
         <Box sx={{ width: '100%' }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" centered>
-                    <Tab label="Log" {...a11yProps(0)} />
+                    <Tab label="Dashboard" {...a11yProps(0)} />
+                    <Tab label="Log" {...a11yProps(1)} />
                 </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
-                <Balance/>
+                <Dashboard/>
+                <History/>
+            </TabPanel>
+            <TabPanel value={value} index={1}>
                 <Log/>
             </TabPanel>
         </Box>

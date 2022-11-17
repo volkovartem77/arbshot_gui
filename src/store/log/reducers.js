@@ -2,7 +2,7 @@ import {FETCH_GENERAL_LOG, SET_AUTO_REFRESH_LOG} from "./actions";
 
 const defaultState = {
     general_log: [],
-    auto_refresh_log: false,
+    auto_refresh_log: true,
 };
 
 export const LogReducer = (state = defaultState, action) => {

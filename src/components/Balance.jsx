@@ -6,11 +6,6 @@ import Grid from "@material-ui/core/Grid";
 import Divider from "@material-ui/core/Divider";
 import {getKey} from "../utils";
 import {hostIP} from "../server_adress";
-import Container from "@material-ui/core/Container";
-import {bindActionCreators} from "redux";
-import {fetchBalance} from "../store/balance/actions";
-import {connect} from "react-redux";
-import withStyles from "@material-ui/core/styles/withStyles";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -36,7 +31,8 @@ const useStyles = makeStyles((theme) => ({
         margin: 8
     },
     listItemText:{
-        fontSize:'1.2em',
+        fontSize:'1.0em',
+        color: "gray"
         // paddingTop: 15
     },
 }));
@@ -88,22 +84,6 @@ function BalanceItem(props) {
     )
 }
 
-const styles = {
-    root: {
-        marginTop: 20,
-    },
-    divider: {
-        marginTop: 20,
-        marginBottom: 20
-    },
-    root_container: {
-        // marginLeft: 0
-    },
-    balance_paper: {
-        minWidth: 250
-    },
-}
-
 export class Balance extends React.Component {
     constructor(props){
         super(props);
@@ -127,31 +107,10 @@ export class Balance extends React.Component {
     }
 
     render() {
-        const {classes, balance} = this.props;
+        const {balance} = this.props;
 
         return <div>
-            <div className={classes.root}>
-                <Container maxWidth="md" className={classes.root_container}>
-                    <Grid item xs={3} className={classes.balance_paper}>
-                        <BalancePaper balance={balance}/>
-                    </Grid>
-                    <Grid item xs={9}/>
-                </Container>
-            </div>
+            <BalancePaper balance={balance}/>
         </div>
     };
 }
-
-const putStateToProps = (state) => {
-    return {
-        balance: state.balance.balance,
-    };
-};
-
-const putActionsToProps = (dispatch) => {
-    return {
-        fetchBalance: bindActionCreators(fetchBalance, dispatch),
-    };
-};
-
-export default withStyles(styles)(connect(putStateToProps, putActionsToProps)(Balance))
