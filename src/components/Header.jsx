@@ -30,6 +30,11 @@ const styles = {
         color: "antiquewhite",
         marginLeft: 10,
     },
+    title_dark_small: {
+        color: "antiquewhite",
+        fontSize: 14,
+        marginLeft: 10,
+    },
     title_label: {
         color: "antiquewhite",
         marginLeft: 10,
@@ -128,7 +133,8 @@ class Header extends React.Component {
                 <Toolbar>
                     <Grid container justifyContent="center" spacing={2}>
                         <Grid item xs={1}/>
-                        <Typography variant="h6" className={classes.title_dark}>
+                        <Typography variant="h6"
+                                    className={window.innerWidth > 600?classes.title_dark:classes.title_dark_small}>
                             TRIANGULAR - BINANCE
                         </Typography>
                     </Grid>

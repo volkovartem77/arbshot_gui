@@ -45,27 +45,27 @@ const styles = {
         color: "#687179",
     },
     table_datetime: {
-        minWidth: 120,
-        maxWidth: 130,
+        minWidth: 130,
+        maxWidth: 135,
     },
     table_chain: {
         minWidth: 150,
-        maxWidth: 170,
+        maxWidth: 155,
     },
     table_size: {
-        minWidth: 80,
-        maxWidth: 90,
+        minWidth: 40,
+        maxWidth: 50,
     },
     table_status: {
-        minWidth: 110,
-        maxWidth: 120,
+        minWidth: 100,
+        maxWidth: 110,
     },
     table_diff: {
-        minWidth: 80,
-        maxWidth: 90,
+        minWidth: 50,
+        maxWidth: 60,
     },
     table_profit: {
-        maxWidth: 80
+        maxWidth: 60
     },
 
     // Position Item
