@@ -267,7 +267,7 @@ class History extends React.Component {
                                 <Divider className={classes.divider}/>
                                 <HistoryHeaders classes={classes}/>
                                 <Divider className={classes.divider}/>
-                                <p>{_hist.toString()}</p>
+                                <p>{JSON.stringify(_hist)}</p>
                                 {Object.values(history).map((value) => (
                                     <HistoryItem
                                         classes={classes}
