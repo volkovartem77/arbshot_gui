@@ -235,6 +235,13 @@ class History extends React.Component {
     render() {
         const { classes, history } = this.props;
 
+        let _hist = Object.values(history)
+        if (_hist.length > 0) {
+            _hist.sort(function(a, b) {
+                return Date.parse(a.datetime) - Date.parse(b.datetime)
+            }).reverse();
+        }
+
         return <div>
             <div className={classes.root}>
                 <Container maxWidth="md" className={classes.root_container}>
@@ -244,17 +251,13 @@ class History extends React.Component {
                                 <Divider className={classes.divider}/>
                                 <HistoryHeaders classes={classes}/>
                                 <Divider className={classes.divider}/>
-                                {
-                                    Object.entries(history).map(
-                                        ( [key, value] ) => (
-                                            <HistoryItem
-                                                classes={classes}
-                                                chain_id={key}
-                                                chain={value}
-                                                key={getKey()}
-                                            />
-                                        ))
-                                }
+                                {_hist.map((value) => (
+                                    <HistoryItem
+                                        classes={classes}
+                                        chain={value}
+                                        key={getKey()}
+                                    />
+                                ))}
                             </Grid>
                         </Grid>
                     </Grid>
