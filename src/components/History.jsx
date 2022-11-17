@@ -116,6 +116,28 @@ const styles = {
         color: "#4e5558",
     },
 }
+
+function sort_hist(hist) {
+    let _hist = hist.slice()
+    let sorted_hist = []
+    let hist_len = _hist.length
+    for (let i = 0; i < hist_len; i++) {
+        let max = 0
+        let max_item = {}
+        let max_item_index = 0
+        for (let it = 0; it < _hist.length; it++) {
+            if (Date.parse(_hist[it].datetime) > max) {
+                max = Date.parse(_hist[it].datetime)
+                max_item = _hist[it]
+                max_item_index = it
+            }
+        }
+        sorted_hist.push(max_item)
+        _hist.splice(max_item_index, 1)
+    }
+    return sorted_hist
+}
+
 function profitStyle(classes, profit) {
     if (profit > 0) {
         return <span className={classes.profit_positive}>{profit}</span>
@@ -235,13 +257,7 @@ class History extends React.Component {
     render() {
         const { classes, history } = this.props;
 
-        let _hist = Object.values(history)
-        if (_hist.length > 0) {
-            _hist.sort(function(a, b) {
-                // return Date.parse(a.datetime) - Date.parse(b.datetime)
-                return (Date.parse(b.datetime) > Date.parse(a.datetime))?1:(Date.parse(a.datetime) > Date.parse(b.datetime))? -1 : 0;
-            })
-        }
+        let _hist = sort_hist(Object.values(history))
 
         return <div>
             <div className={classes.root}>
