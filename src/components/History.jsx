@@ -238,8 +238,9 @@ class History extends React.Component {
         let _hist = Object.values(history)
         if (_hist.length > 0) {
             _hist.sort(function(a, b) {
-                return Date.parse(a.datetime) - Date.parse(b.datetime)
-            }).reverse();
+                // return Date.parse(a.datetime) - Date.parse(b.datetime)
+                return (Date.parse(b.datetime) > Date.parse(a.datetime))?1:(Date.parse(a.datetime) > Date.parse(b.datetime))? -1 : 0;
+            })
         }
 
         return <div>
