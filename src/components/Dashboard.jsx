@@ -75,7 +75,7 @@ class Dashboard extends React.Component {
 
         return <div>
             <div className={classes.root}>
-                <Container maxWidth="sm" className={classes.root_container}>
+                <Container maxWidth="md" className={classes.root_container}>
                     <Grid item xs={12}>
                         <Grid container spacing={1} justifyContent="center">
                             <Grid item xs={3} className={classes.balance_paper}>
