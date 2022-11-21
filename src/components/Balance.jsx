@@ -27,8 +27,15 @@ const useStyles = makeStyles((theme) => ({
         color: "#5a5a82",
         fontSize:'0.9em'
     },
+    title2: {
+        color: "rgba(90,90,130,0.43)",
+        fontSize:'0.8em'
+    },
     divider: {
         margin: 8
+    },
+    divider2: {
+        margin: 8,
     },
     listItemText:{
         fontSize:'1.0em',
@@ -54,11 +61,24 @@ function BalancePaper(props) {
             {
                 Object.entries(balance.balance).map(
                     ( [key, value] ) => (
-                        <BalanceItem
-                            asset={key}
-                            amount={Number(value).toFixed(8)}
-                            key={getKey()}
-                        />
+                        key!=="BTC(USDT)"?
+                            <BalanceItem
+                                asset={key}
+                                amount={Number(value).toFixed(8)}
+                                key={getKey()}
+                            />:<div/>
+                    ))
+            }
+            <Divider className={classes.divider2}/>
+            {
+                Object.entries(balance.balance).map(
+                    ( [key, value] ) => (
+                        key==="BTC(USDT)"?
+                            <BalanceItemSmall
+                                asset={key}
+                                amount={Number(value).toFixed(8)}
+                                key={getKey()}
+                            />:<div/>
                     ))
             }
         </Paper>
@@ -77,6 +97,25 @@ function BalanceItem(props) {
             </Grid>
             <Grid container item justifyContent="flex-end" xs={6} spacing={0}>
                 <Typography variant="h6" className={classes.title}>
+                    {props.amount}
+                </Typography>
+            </Grid>
+        </Grid>
+    )
+}
+
+function BalanceItemSmall(props) {
+    const classes = useStyles();
+
+    return (
+        <Grid container spacing={1}>
+            <Grid container item justifyContent="flex-start" xs={6} spacing={0}>
+                <Typography variant="h6" className={classes.title2}>
+                    {props.asset}
+                </Typography>
+            </Grid>
+            <Grid container item justifyContent="flex-end" xs={6} spacing={0}>
+                <Typography variant="h6" className={classes.title2}>
                     {props.amount}
                 </Typography>
             </Grid>
