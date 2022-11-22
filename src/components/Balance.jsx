@@ -66,7 +66,7 @@ function BalancePaper(props) {
                                 asset={key}
                                 amount={Number(value).toFixed(8)}
                                 key={getKey()}
-                            />:<div/>
+                            />:<div key={getKey()}/>
                     ))
             }
             <Divider className={classes.divider2}/>
@@ -78,7 +78,7 @@ function BalancePaper(props) {
                                 asset={key}
                                 amount={Number(value).toFixed(8)}
                                 key={getKey()}
-                            />:<div/>
+                            />:<div key={getKey()}/>
                     ))
             }
         </Paper>

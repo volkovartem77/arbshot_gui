@@ -6,6 +6,7 @@ import Box from '@material-ui/core/Box';
 import Log from "./Log";
 import Dashboard from "./Dashboard";
 import History from "./History";
+import Settings from "./Settings";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -53,6 +54,7 @@ function TabsPanel() {
                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" centered>
                     <Tab label="Dashboard" {...a11yProps(0)} />
                     <Tab label="Log" {...a11yProps(1)} />
+                    <Tab label="Settings" {...a11yProps(2)} />
                 </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
@@ -61,6 +63,9 @@ function TabsPanel() {
             </TabPanel>
             <TabPanel value={value} index={1}>
                 <Log/>
+            </TabPanel>
+            <TabPanel value={value} index={2}>
+                <Settings/>
             </TabPanel>
         </Box>
     );

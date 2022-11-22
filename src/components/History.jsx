@@ -30,7 +30,8 @@ const styles = {
         margin: 8
     },
     history_container: {
-        minWidth: 375
+        minWidth: 375,
+        maxWidth: 575,
     },
 
     // Table
