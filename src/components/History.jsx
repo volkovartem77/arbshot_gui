@@ -54,8 +54,8 @@ const styles = {
         maxWidth: 105,
     },
     table_chain: {
-        minWidth: 160,
-        maxWidth: 165,
+        minWidth: 162,
+        maxWidth: 167,
     },
     table_chain_small: {
         minWidth: 45,
