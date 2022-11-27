@@ -47,6 +47,18 @@ class TradesTable extends React.Component {
         const {trades, page, rows_per_page} = this.props;
 
         // Styles
+        const tbl_root = {
+            maxHeight: 600,
+            maxWidth: 1500
+        }
+        const tbl_root_md = {
+            maxHeight: 600,
+            maxWidth: 650
+        }
+        const tbl_root_small = {
+            maxHeight: 600,
+            maxWidth: 340
+        }
         const tbl_cell = {
             whiteSpace: "nowrap",
             fontSize: 12,
@@ -56,8 +68,10 @@ class TradesTable extends React.Component {
             color: "#687179",
         }
 
+        let w = window.innerWidth
+
         return <Paper>
-            <TableContainer style={{ maxHeight: 600, minWidth: 1500 }}>
+            <TableContainer style={w > 400?w > 700?tbl_root:tbl_root_md:tbl_root_small}>
                 <Table stickyHeader size="small" aria-label="a dense table">
                     <TableHead>
                         <TableRow>
