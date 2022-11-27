@@ -57,6 +57,7 @@ then type password
  ```
 cd ~/arbshot_gui
 docker compose down
+rm package-lock.json
 git pull
 ```
 ```
