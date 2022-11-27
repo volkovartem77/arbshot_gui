@@ -7,6 +7,7 @@ import Log from "./Log";
 import Dashboard from "./Dashboard";
 import History from "./History";
 import Settings from "./Settings";
+import Trades from "./Trades";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -53,8 +54,9 @@ function TabsPanel() {
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" centered>
                     <Tab label="Dashboard" {...a11yProps(0)} />
-                    <Tab label="Log" {...a11yProps(1)} />
+                    <Tab label="Trades" {...a11yProps(1)} />
                     <Tab label="Settings" {...a11yProps(2)} />
+                    <Tab label="Log" {...a11yProps(3)} />
                 </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
@@ -62,10 +64,13 @@ function TabsPanel() {
                 <History/>
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <Log/>
+                <Trades/>
             </TabPanel>
             <TabPanel value={value} index={2}>
                 <Settings/>
+            </TabPanel>
+            <TabPanel value={value} index={3}>
+                <Log/>
             </TabPanel>
         </Box>
     );
